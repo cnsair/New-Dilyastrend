@@ -10,6 +10,8 @@ module.exports = {
       secondarycolor: "#7380f5",
       grey: "#8B8B8B",
       lightgrey: "#F2F2F2",
+      categories: "#E5F3FB",
+      deepcategories: "#040836",
     },
   },
   plugins: [require("daisyui")],
