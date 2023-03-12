@@ -12,6 +12,7 @@ module.exports = {
       lightgrey: "#F2F2F2",
       categories: "#E5F3FB",
       deepcategories: "#040836",
+      lightblue: "#474A6C",
     },
   },
   plugins: [require("daisyui")],
