@@ -10,7 +10,7 @@ const Navigation = () => {
 
   const handleSignup = () => {
     setMenuOpen(!menuOpen);
-    navigate("/signup");
+    navigate("/auth/signup");
   };
 
   return (

@@ -9,8 +9,8 @@ const Search = () => {
             <input
               type="text"
               placeholder="search for items"
-              autocomplete="off"
-              className=" input input-bordered w-full noselect text-grey text-sm bg-lightgrey shadow focus:outline-0 hover:shadow-lg"
+              autoComplete="off"
+              className=" input input-bordered w-full noselect text-grey text-sm opacity-80 shadow focus:outline-0 hover:shadow-lg"
             />
             <div className="opacity-50 absolute top-4 right-3">
               <FaSearch />
