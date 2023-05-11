@@ -6,28 +6,17 @@ import Button from "../../components/Button/Button";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FormProvider, useForm } from "react-hook-form";
 
 const Signin = () => {
+  const methods = useForm();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+
+  // submit login request ----> refactor to redux state later
+  const onSubmit = methods.handleSubmit((data) => {
+    console.log(data);
   });
-
-  let { username, password } = formData;
-
-  const handleChange = (e) => {
-    // validate and sanitize input
-
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.id]: e.target.value,
-    }));
-  };
-
-  // submit login request
-  const handleSubmit = () => {};
 
   return (
     <Animate>
@@ -47,64 +36,57 @@ const Signin = () => {
           <div className="mt-12">
             <div className="flex justify-center">
               <div className="p-6 shadow-lg rounded-lg border w-96">
-                <form onSubmit={handleSubmit}>
-                  <p className="font-semibold text-dark text-xl">Sign In</p>
-                  <p className="my-4 text-dark opacity-80">
-                    Login using an existing account or create a new account{" "}
-                    <span className="font-bold">
-                      <Link to="/auth/signup">here</Link>
-                    </span>
-                  </p>
-                  {/* username */}
-                  <div className="form-control w-full mb-3">
-                    <div>
-                      <Input
-                        placeholder="username"
-                        onChange={handleChange}
-                        id="username"
-                        value={username}
-                        type="text"
-                        autoComplete="off"
-                      />
-                      {/* error message here */}
-                      <div className="text-danger text-xs error-msg">
-                        <span>username is required</span>
+                <FormProvider {...methods}>
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    <p className="font-semibold text-dark text-xl">Sign In</p>
+                    <p className="my-4 text-dark opacity-80">
+                      Login using an existing account or create a new account{" "}
+                      <span className="font-bold">
+                        <Link to="/auth/signup">here</Link>
+                      </span>
+                    </p>
+                    {/* username */}
+                    <div className="form-control w-full mb-3">
+                      <div>
+                        <Input
+                          placeholder="username"
+                          id="username"
+                          name="username"
+                          type="text"
+                          autoComplete="off"
+                        />
                       </div>
                     </div>
-                  </div>
 
-                  {/* password */}
-                  <div className="form-control w-full mb-3">
-                    <div className="relative">
-                      <Input
-                        placeholder="password"
-                        id="password"
-                        value={password}
-                        type={showPassword ? "text" : "password"}
-                        autoComplete="off"
-                        className="input input-bordered border-bordercolor w-full max-w-md text-sm text-dark bg-white noselect mb-1 focus:outline-0 hover:shadow-sm"
-                      />
-                      <span
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        className="text-dark absolute top-1 my-3 right-5 cursor-pointer text-xl bg-transparent"
-                      >
-                        {showPassword ? <FaEye /> : <FaEyeSlash />}
-                      </span>
-                      {/* <span className="text-dark absolute top-1 py-2 right-5 cursor-pointer text-sm bg-transparent">
-                        hide
-                      </span> */}
+                    {/* password */}
+                    <div className="form-control w-full mb-3">
+                      <div className="relative">
+                        <Input
+                          placeholder="password"
+                          id="password"
+                          name="password"
+                          type={showPassword ? "text" : "password"}
+                          autoComplete="off"
+                        />
+                        <span
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="text-dark absolute top-1 my-3 right-5 cursor-pointer text-xl bg-transparent"
+                        >
+                          {showPassword ? <FaEye /> : <FaEyeSlash />}
+                        </span>
+                      </div>
                     </div>
-                    {/* error message here */}
-                    <div className="text-danger text-xs error-msg">
-                      <span>password is required</span>
-                    </div>
-                  </div>
 
-                  {/* login button */}
-                  <div className="w-full form-control">
-                    <Button>Submit</Button>
-                  </div>
-                </form>
+                    {/* login button */}
+                    <div className="w-full form-control">
+                      <Button onClick={onSubmit}>Submit</Button>
+                    </div>
+                  </form>
+                </FormProvider>
 
                 {/* login with */}
                 <div className="mt-5">
