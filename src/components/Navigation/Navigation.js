@@ -8,9 +8,9 @@ const Navigation = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleSignup = () => {
+  const handleSignin = () => {
     setMenuOpen(!menuOpen);
-    navigate("/auth/signup");
+    navigate("/auth/signin");
   };
 
   return (
@@ -68,7 +68,7 @@ const Navigation = () => {
             </Link>
           </li>
 
-          <Button onClick={handleSignup}>Signup</Button>
+          <Button onClick={handleSignin}>Sign in</Button>
         </ul>
       </div>
     </nav>
