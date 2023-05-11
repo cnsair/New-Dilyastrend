@@ -24,7 +24,7 @@ const Footer = () => {
                   <input
                     type="email"
                     placeholder="email"
-                    autocomplete="off"
+                    autoComplete="off"
                     className="pr-12 input input-bordered w-60 noselect text-dark text-sm bg-lightblue shadow focus:outline-0 hover:shadow-lg"
                   />
                   <div className="absolute top-0 right-0">
