@@ -7,6 +7,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FormProvider, useForm } from "react-hook-form";
+import {
+  name_validation,
+  email_validation,
+  password_validation,
+  username_validation,
+  phone_validation,
+} from "../../utils/inputValidation";
 
 const Signup = () => {
   const methods = useForm();
@@ -17,12 +24,13 @@ const Signup = () => {
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data);
   });
+
   return (
     <Animate>
       <Container>
         <div className="p-6 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 md:gap-7 lg:gap-7 xl:gap-12 h-screen text-dark md:p-12 lg:p-12 xl:p-12">
-          <div className="mt-12">
-            <p className="font-bold text-6xl mb-6 leading-tight">
+          <div className="mt-6 md:mt-12 lg:mt-12 xl:mt-12">
+            <p className="font-bold text-2xl md:text-4xl lg:text-6xl xl:text-6xl mb-3 md:mb-3 lg:mb-6 xl:mb-6 leading-tight">
               Create, sell or collect digital items.
             </p>
             <p className="leading-normal font-normal">
@@ -31,7 +39,7 @@ const Signup = () => {
               ut enim.
             </p>
           </div>
-          <div className="mt-12">
+          <div className="mt-1 md:mt-12 lg:mt-12 xl:mt-12">
             <div className="flex justify-center">
               <div className="p-6 shadow-lg rounded-lg border w-full">
                 <FormProvider {...methods}>
@@ -45,75 +53,55 @@ const Signup = () => {
                       Don't have an account? Register now.
                     </p>
                     <div className="form-control w-full mb-3">
-                      <div className="grid grid-cols-2 gap-7">
+                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-2 md:gap-2 lg:gap-7 xl:gap-7">
+                        {/* name */}
                         <div>
-                          {/* name */}
-                          <Input
-                            placeholder="name"
-                            id="name"
-                            name="name"
-                            type="text"
-                            autoComplete="off"
-                          />
+                          <Input {...name_validation} />
                         </div>
+
+                        {/* email */}
                         <div>
-                          {/* email */}
-                          <Input
-                            placeholder="email address"
-                            id="email"
-                            name="email"
-                            type="email"
-                            autoComplete="off"
-                          />
+                          <Input {...email_validation} />
                         </div>
                       </div>
                     </div>
 
                     <div className="form-control w-full mb-3">
-                      <div className="grid grid-cols-2 gap-7">
+                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-2 md:gap-2 lg:gap-7 xl:gap-7">
+                        {/* username */}
                         <div>
-                          {/* username */}
-                          <Input
-                            placeholder="choose a username"
-                            id="username"
-                            name="username"
-                            type="text"
-                            autoComplete="off"
-                          />
+                          <Input {...username_validation} />
                         </div>
+
+                        {/* phone */}
                         <div>
-                          {/* phone */}
-                          <Input
-                            placeholder="phone"
-                            id="phone"
-                            name="phone"
-                            type="text"
-                            autoComplete="off"
-                          />
+                          <Input {...phone_validation} />
                         </div>
                       </div>
                     </div>
 
                     <div className="form-control w-full mb-3">
-                      <div className="grid grid-cols-2 gap-7">
+                      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-2 md:gap-2 lg:gap-7 xl:gap-7">
+                        {/* password */}
                         <div>
-                          <Input
-                            placeholder="password"
-                            id="password"
-                            name="password"
-                            type="password"
-                            autoComplete="off"
-                          />
+                          <Input {...password_validation} />
                         </div>
 
+                        {/* confirm password */}
                         <div>
                           <div className="relative">
                             <Input
                               placeholder="re-enter password"
                               id="confirmPassword"
-                              name="confirmPassword"
+                              name="confirm password"
                               type={showPassword ? "text" : "password"}
                               autoComplete="off"
+                              validation={{
+                                required: {
+                                  value: true,
+                                  message: "required",
+                                },
+                              }}
                             />
                             <span
                               onClick={() => setShowPassword((prev) => !prev)}
@@ -122,6 +110,7 @@ const Signup = () => {
                               {showPassword ? <FaEye /> : <FaEyeSlash />}
                             </span>
                           </div>
+                          {password_validation.value}
                         </div>
                       </div>
                     </div>

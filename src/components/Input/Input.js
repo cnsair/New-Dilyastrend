@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 import { isFormInvalid, findInputError } from "../../utils/index";
 
-const Input = ({ type, placeholder, name, id, autoComplete }) => {
+const Input = ({ type, placeholder, name, id, autoComplete, validation }) => {
   const {
     register,
     formState: { errors },
@@ -19,13 +19,8 @@ const Input = ({ type, placeholder, name, id, autoComplete }) => {
         name={name}
         id={id}
         autoComplete={autoComplete}
-        className="input input-bordered w-full text-dark text-sm opacity-80 shadow bg-transparent  focus:outline-0 hover:shadow-sm mb-2"
-        {...register(name, {
-          required: {
-            value: true,
-            message: name + " is required",
-          },
-        })}
+        className="input input-bordered w-full text-dark text-sm opacity-80 shadow bg-transparent focus:outline-0 hover:shadow-sm mb-2"
+        {...register(name, validation)}
       />
 
       {/* error */}
